@@ -3,13 +3,13 @@ import styled from 'styled-components/native';
 import {
   SafeAreaView,
   StatusBar,
-  StyleSheet,
-  Text,
   View,
   useColorScheme,
+  FlatList,
 } from 'react-native';
 import {Searchbar} from 'react-native-paper';
-import {RestaurantInfo} from '../../components/restuarants-info-card.component';
+import {RestaurantInfoCard} from '../../components/restuarants-info-card.component';
+import {Spacer} from '../../../components/spacer/spacer.component';
 
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -43,9 +43,16 @@ export default function RestaurantsScreen() {
           value={searchQuery}
         />
       </SearchConatiner>
-      <RestaurantListContainer>
-        <RestaurantInfo />
-      </RestaurantListContainer>
+      <FlatList
+        data={[{name: 1}, {name: 2}, {name: 3}, {name: 4}]}
+        renderItem={() => (
+          <Spacer position="bottom" size="large">
+            <RestaurantInfoCard />
+          </Spacer>
+        )}
+        keyExtractor={item => item.name}
+        contentContainerStyle={{padding: 16}}
+      />
     </SafeArea>
   );
 }

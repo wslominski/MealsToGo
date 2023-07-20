@@ -8,14 +8,18 @@
 
 import React from 'react';
 import {StatusBar} from 'react-native';
+import {theme} from './src/infrastructure/theme/index';
 
 import RestaurantsScreen from '../MealsToGo/src/features/restaurants/screens/restaurants.screen';
+import {ThemeProvider} from 'styled-components/native';
 
 function App(): JSX.Element {
   return (
     <>
-      <RestaurantsScreen />
-      <StatusBar />
+      <ThemeProvider theme={theme}>
+        <RestaurantsScreen />
+        <StatusBar />
+      </ThemeProvider>
     </>
   );
 }

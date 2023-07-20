@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Oswald_400Regular';
+    src: url('Oswald_400Regular'),
+        url('../../../node_modules/@fontsource/oswald/files/oswald-cyrillic-400-normal.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Lato_400Regular';
+    src: url('Lato_400Regular'),
+    url('../../../node_modules/@fontsource/lato/files/lato-latin-300-normal.woff2') format('woff2');
+}
