@@ -84,11 +84,11 @@ import {
   Address,
 } from './restaurant-into-card.styles';
 
-export const RestaurantInfoCard = ({restaurant = {}}) => {
+export const RestaurantInfoCard = ({restaurant}) => {
   const star = require('../../../assets/images/star.png');
   const openIconPng = require('../../../assets/images/openIcon.png');
   const {
-    name = 'Some Restaurant',
+    name = 'Name',
     icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
     photos = [
       'https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg',
@@ -103,7 +103,7 @@ export const RestaurantInfoCard = ({restaurant = {}}) => {
 
   return (
     <RestaurantCard elevation={5}>
-      <RestaurantCardCover key={name} source={{uri: photos[0]}} />
+      <RestaurantCardCover key={name} source={{uri: restaurant.photos}} />
       <Info>
         <Text variant="label">{name}</Text>
         <Section>
