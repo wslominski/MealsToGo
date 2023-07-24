@@ -1,73 +1,3 @@
-// import React, {useState} from 'react';
-// import {StyleSheet, Text, View, Image, ViewBase} from 'react-native';
-// import {Card} from 'react-native-paper';
-// import styled from 'styled-components/native';
-
-// const RestaurantCard = styled(Card)`
-//   background-color: white;
-// `;
-
-// const RestaurantCardCover = styled(Card.Cover)`
-//   padding: ${props => props.theme.space[3]};
-//   background-color: white;
-// `;
-
-// const Title = styled(Text)`
-//   font-size: ${props => props.theme.fontSizes.body};
-// `;
-
-// const Info = styled(View)`
-//   padding: ${props => props.theme.space[3]};
-// `;
-
-// const Address = styled(Text)`
-//   font-size: ${props => props.theme.fontSizes.caption};
-// `;
-
-// const RatingRow = styled(View)`
-//   padding-top: ${props => props.theme.space[1]};
-//   padding-bottom: ${props => props.theme.space[1]};
-//   flex-direction: row;
-//   justify-content: space-between;
-// `;
-
-// export const RestaurantInfo = ({restaurant = {}}: any) => {
-//   const {
-//     name = 'Restaurant One',
-//     icon,
-//     photos = [
-//       'https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg',
-//     ],
-//     address = '100 some street',
-//     isOpenNow = true,
-//     rating = 4,
-//     isClosedTemorarily,
-//   } = restaurant;
-//   const starPng = require('../../../assets/images/star.png');
-//   const openIconPng = require('../../../assets/images/openIcon.png');
-//   const [starSrc, setStarSrc] = useState(starPng);
-//   const ratingArray = Array.from(new Array(Math.floor(rating)));
-//   return (
-//     <RestaurantCard elevation={5}>
-//       <RestaurantCardCover key={name} source={{uri: photos[0]}} />
-//       <Info>
-//         <Title>{name}</Title>
-//         <RatingRow>
-//           <View style={{flexDirection: 'row'}}>
-//             {ratingArray.map(() => (
-//               <Image source={starSrc} style={{width: 20, height: 20}} />
-//             ))}
-//           </View>
-//           {isOpenNow && (
-//             <Image source={openIconPng} style={{width: 20, height: 20}} />
-//           )}
-//         </RatingRow>
-//         <Address>{address}</Address>
-//       </Info>
-//     </RestaurantCard>
-//   );
-// };
-
 import React from 'react';
 import {Image} from 'react-native';
 import {Spacer} from '../../components/spacer/spacer.component';
@@ -97,6 +27,7 @@ export const RestaurantInfoCard = ({restaurant}) => {
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = false,
+    placeId,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
@@ -108,8 +39,12 @@ export const RestaurantInfoCard = ({restaurant}) => {
         <Text variant="label">{name}</Text>
         <Section>
           <Rating>
-            {ratingArray.map(() => (
-              <Image source={star} style={{width: 20, height: 20}} />
+            {ratingArray.map((_, i) => (
+              <Image
+                key={`star-${placeId}-${i}`}
+                source={star}
+                style={{width: 20, height: 20}}
+              />
             ))}
           </Rating>
           <SectionEnd>

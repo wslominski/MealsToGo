@@ -6,12 +6,15 @@ import {
   View,
   useColorScheme,
   FlatList,
+  Pressable,
 } from 'react-native';
 import {ActivityIndicator, Searchbar} from 'react-native-paper';
 import {RestaurantInfoCard} from '../../components/restuarants-info-card.component';
 import {Spacer} from '../../../components/spacer/spacer.component';
 import {SafeArea} from '../../../components/utils/safe-area.component';
 import {RestaurantContext} from '../../../services/restaurants/restaurants.context';
+import {Search} from '../../components/search.component';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const SearchConatiner = styled(View)`
   padding: 16px;
@@ -34,13 +37,9 @@ const LoadingContainer = styled(View)`
   left: 50%;
 `;
 
-export default function RestaurantsScreen() {
+export default function RestaurantsScreen({navigation}) {
   const {loading, error, restaurants} = useContext(RestaurantContext);
-  const [searchQuery, setSearchQuery] = React.useState('');
   const isDarkMode = useColorScheme() === 'dark';
-
-  const onChangeSearch = (query: React.SetStateAction<string>) =>
-    setSearchQuery(query);
 
   return (
     <SafeArea>
@@ -49,20 +48,19 @@ export default function RestaurantsScreen() {
           <Loading size={50} animating={true} color="blue" />
         </LoadingContainer>
       )}
-      <SearchConatiner>
-        <Searchbar
-          placeholder="Search"
-          onChangeText={onChangeSearch}
-          value={searchQuery}
-        />
-      </SearchConatiner>
+      <Search />
       <RestaurantList
         data={restaurants}
         renderItem={({item}) => {
           return (
-            <Spacer position="bottom" size="large">
-              <RestaurantInfoCard restaurant={item} />
-            </Spacer>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('RestaurantDetail', {restaurant: item})
+              }>
+              <Spacer position="bottom" size="large">
+                <RestaurantInfoCard restaurant={item} />
+              </Spacer>
+            </TouchableOpacity>
           );
         }}
         keyExtractor={item => item.name}
