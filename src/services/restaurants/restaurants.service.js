@@ -18,6 +18,8 @@ export const restaurantsTransform = ({results = []}) => {
   const mappedResults = results.map(restaurant => {
     return {
       ...restaurant,
+      rating: restaurant.rating,
+      address: restaurant.vicinity,
       photos: mockImages[Math.ceil(Math.random() * (mockImages.length - 1))],
       isClosedTemporarily: restaurant.business_status === 'CLOSED_TEMPORARILY',
       isOpenNow: restaurant.opening_hours && restaurant.opening_hours.open_now,

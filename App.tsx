@@ -17,6 +17,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SafeArea} from './src/components/utils/safe-area.component';
 import Icon from 'react-native-ionicons';
 import {RestaurantsContextProvider} from './src/services/restaurants/restaurants.context';
+import {LocationContextProvider} from './src/services/location/location.context';
+import {Navigation} from './src/infrastructure/navigation/theme';
+import {AppNavigator} from './src/infrastructure/navigation/app.navigator';
 
 const star = require('./assets/images/star.png');
 
@@ -61,15 +64,11 @@ function App(): JSX.Element {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <RestaurantsContextProvider>
-          <NavigationContainer>
-            <Tab.Navigator screenOptions={screenOptions}>
-              <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-              <Tab.Screen name="Settings" component={Settings} />
-              <Tab.Screen name="Map" component={Map} />
-            </Tab.Navigator>
-          </NavigationContainer>
-        </RestaurantsContextProvider>
+        <LocationContextProvider>
+          <RestaurantsContextProvider>
+            <Navigation />
+          </RestaurantsContextProvider>
+        </LocationContextProvider>
       </ThemeProvider>
       <StatusBar />
     </>
